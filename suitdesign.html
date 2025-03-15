@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suit Designs - Malik Tailors</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body { font-family: 'Poppins', sans-serif; }
+        .designs-header {
+            text-align: center;
+            padding: 50px 20px;
+            background: #222;
+            color: white;
+        }
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); }
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            display: block;
+            cursor: pointer;
+        }
+        .btn-success {
+            background-color: #25D366;
+            border: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 12px;
+            margin-top: auto;
+            display: block;
+        }
+        .btn-success:hover { background-color: #1ebe57; }
+    </style>
+</head>
+<body>
+
+    <header class="bg-dark text-white p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="./logo.jpg" alt="Malik Tailors" height="60" style="max-width: 150px; object-fit: contain;">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="suitdesign.html">Suit Designs</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="designs-header">
+        <h1>Our Latest Suit Designs</h1>
+        <p>Discover a variety of elegant and stylish suits for every occasion.</p>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5" style="font-size: 2.5rem;">Latest Suit Designs</h2>
+            <div class="row" id="suitContainer">
+                <!-- JavaScript will add suits here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Image Gallery -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Suit Gallery</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" class="img-fluid" src="" alt="Suit Image">
+                </div>
+                <div class="modal-footer">
+                    <button id="prevBtn" class="btn btn-secondary">Previous</button>
+                    <button id="nextBtn" class="btn btn-secondary">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const suits = [
+        { 
+                images: [
+                    'https://i.etsystatic.com/29691927/r/il/e9e835/3937555144/il_794xN.3937555144_35ou.jpg',
+                    'https://i.etsystatic.com/29691927/r/il/a241da/3937555134/il_75x75.3937555134_n9ug.jpg',
+                    'https://i.etsystatic.com/29691927/r/il/13ab0c/3937555150/il_75x75.3937555150_dgu1.jpg',
+                    'https://i.etsystatic.com/29691927/r/il/91e714/3858233070/il_794xN.3858233070_r0rx.jpg'
+                ],
+                title: 'Off White shalwar kamiz',
+                description: 'Ideal for weddings and formal events',
+                price: '$60'
+            },
+            { 
+                images: [
+                    'https://img1.bradymensuit.com/pdcimg/detail/12/127a838a734b1b3ebd78a7bc685dcfcc.webp',
+                    'https://img2.bradymensuit.com/pdcimg/list/7a/7aaa7ffd409ea405e9e42364120b1776.webp',
+                    'https://img2.bradymensuit.com/pdcimg/list/96/9685c7102867d04b03a5d5728111363a.webp'
+                ],
+                title: 'Italian Brown Men Suit',
+                description: 'Suit Wedding Business Suit Adjustable Chest Button',
+                price: '$200'
+            },
+            { 
+                images: [
+                    'https://i.etsystatic.com/37036729/r/il/a1ab47/4321988155/il_794xN.4321988155_nggh.jpg', 
+                     'https://i.etsystatic.com/37036729/r/il/70f162/4321989089/il_794xN.4321989089_5dbh.jpg',
+                     'https://i.etsystatic.com/37036729/r/il/ff956e/4274587744/il_794xN.4274587744_6wys.jpg',
+                     'https://i.etsystatic.com/37036729/r/il/47b907/4235299952/il_794xN.4235299952_44z3.jpg'
+                    ],
+                title: 'Classic Black Suit',
+                description: 'Elegant and stylish for all occasions',
+                price: '$70'
+            },
+            { 
+                images: [
+                         'https://i.etsystatic.com/39698029/r/il/788e75/5865281718/il_794xN.5865281718_43m0.jpg',
+                        'https://i.etsystatic.com/39698029/r/il/5418b4/5913373517/il_794xN.5913373517_owql.jpg',
+                          'https://i.etsystatic.com/39698029/r/il/c00484/5913373537/il_75x75.5913373537_25o3.jpg',
+                        'https://i.etsystatic.com/39698029/r/il/e0ab55/5865283234/il_75x75.5865283234_qi8j.jpg',
+                         'https://i.etsystatic.com/39698029/r/il/2ce20d/5913375113/il_75x75.5913375113_j4t7.jpg'
+                        ],
+                title: 'Navy blue shalwar kameez',
+                description: 'Ideal for weddings and formal events',
+                price: '$60'
+            },
+            { 
+                images: [
+                    'https://i.etsystatic.com/29691927/r/il/d88963/4120808325/il_794xN.4120808325_6xrv.jpg',
+                    'https://i.etsystatic.com/29691927/r/il/32eec5/4073162580/il_794xN.4073162580_m1dk.jpg',
+                    'https://i.etsystatic.com/29691927/r/il/848054/4120808345/il_794xN.4120808345_7rrs.jpg',
+                    'https://i.etsystatic.com/29691927/r/il/91e714/3858233070/il_794xN.3858233070_r0rx.jpg'
+                ],
+                title: 'Brown Shalwar Kameez',
+                description: 'Elegant and stylish for all occasions',
+                price: '$50'
+            },
+            { 
+                images: [
+                    'https://i.pinimg.com/236x/15/68/d5/1568d5bee7ec09279e8eda3a62df0692.jpg',
+                    'https://m.media-amazon.com/images/I/61jygq-XUtL._AC_SX522_.jpg',
+                    'https://m.media-amazon.com/images/I/71R7ns7WAwL._AC_SX522_.jpg',
+                    'https://m.media-amazon.com/images/I/51Uiy2KmjrL._AC_SX522_.jpg',
+                    'https://m.media-amazon.com/images/I/61kg0t3pTBL._AC_SY500_.jpg' ],
+                title: 'White Formal Suit',
+                description: 'Ideal for weddings and formal events',
+                price: '$160'
+            },
+            { 
+                images: [
+                    'https://i.pinimg.com/736x/c5/fa/f1/c5faf1a74deb8882a6879fe09d23f42b.jpg',
+                    'https://i.pinimg.com/236x/5a/86/38/5a8638527fa21aada6ad541486b6c133.jpg',
+                    'https://i.pinimg.com/236x/04/4d/52/044d52a6f50ff284f5ec6861c2426dc1.jpg'
+                ],
+                title: 'Black Three peice suit',
+                description: 'Ideal for weddings and formal events',
+                price: '$200'
+            },
+            { 
+                images: [
+                    'https://i.etsystatic.com/19536903/r/il/009f1c/6660358867/il_794xN.6660358867_myx4.jpg',
+                    'https://i.etsystatic.com/19536903/r/il/905771/6660356201/il_75x75.6660356201_7tiw.jpg',
+                    'https://i.etsystatic.com/19536903/r/il/122814/6612262966/il_794xN.6612262966_owgg.jpg'
+                ],
+                title: 'Classic Black sharwani',
+                description: 'Elegant and stylish for barat and Wedding Events',
+                price: '$250'
+            },
+            { 
+                images: [
+                    'https://img1.bradymensuit.com/pdcimg/detail/12/127a838a734b1b3ebd78a7bc685dcfcc.webp',
+                    'https://img2.bradymensuit.com/pdcimg/list/7a/7aaa7ffd409ea405e9e42364120b1776.webp',
+                    'https://img2.bradymensuit.com/pdcimg/list/96/9685c7102867d04b03a5d5728111363a.webp'
+                ],
+                title: 'Italian Brown Men Suit',
+                description: 'Suit Wedding Business Suit Adjustable Chest Button',
+                price: '$200'
+            },
+            { 
+                images: [
+                    'https://i.etsystatic.com/39698029/r/il/6182e2/5923374447/il_794xN.5923374447_9sex.jpg',
+                    'https://i.etsystatic.com/39698029/r/il/2183c6/5923374463/il_794xN.5923374463_7yjs.jpg',
+                    'https://i.etsystatic.com/39698029/r/il/a98776/5923374469/il_794xN.5923374469_3q0n.jpg',
+                    'https://i.etsystatic.com/39698029/r/il/334a8b/5875288972/il_794xN.5875288972_ofql.jpg',
+                    'https://i.etsystatic.com/39698029/r/il/e64a1d/5875291260/il_794xN.5875291260_tv1d.jpg',
+                    'https://i.etsystatic.com/39698029/r/il/8e8703/5875291280/il_794xN.5875291280_oxn0.jpg'
+                ],
+                title: 'Gray Shalwar Kameez',
+                description: 'Ideal for weddings and formal events',
+                price: '$60'
+            },
+            { 
+                images: ['https://i.etsystatic.com/37036729/r/il/242df9/4235375106/il_794xN.4235375106_7wkr.jpg',
+                 'https://i.etsystatic.com/37036729/r/il/27b13e/4235375108/il_794xN.4235375108_iaq2.jpg',
+                'https://i.etsystatic.com/37036729/r/il/02df91/4283025543/il_794xN.4283025543_qc5u.jpg',
+                  'https://i.etsystatic.com/37036729/r/il/47b907/4235299952/il_794xN.4235299952_44z3.jpg'],
+                title: 'Man kameez shalwar ',
+                description: 'Elegant and stylish for all occasions, and primium fabrics',
+                price: '$120'
+            },
+            { 
+                images: ['https://i.pinimg.com/236x/15/68/d5/1568d5bee7ec09279e8eda3a62df0692.jpg', './pic4.jpg'],
+                title: 'White Formal Suit',
+                description: 'Ideal for weddings and formal events',
+                price: '$160'
+            },
+            { 
+                images: ['https://i.etsystatic.com/37036729/r/il/dbebea/4750566963/il_794xN.4750566963_g45f.jpg',
+                 'https://i.etsystatic.com/37036729/r/il/280de6/4750566579/il_794xN.4750566579_khu6.jpg',
+                   'https://i.etsystatic.com/37036729/r/il/989965/4123254481/il_1140xN.4123254481_1qm5.jpg'],
+                title: 'Green wase coat,shalwar kameez',
+                description: 'Elegant and stylish for all occasions',
+                price: '$80'
+            },
+            { 
+                images: ['https://i.etsystatic.com/39698029/r/il/66d3cf/5612484546/il_794xN.5612484546_67kb.jpg', 
+                         'https://i.etsystatic.com/39698029/r/il/4ab153/5660571455/il_1140xN.5660571455_dke2.jpg',
+                          'https://i.etsystatic.com/39698029/r/il/06bdf4/5612484562/il_75x75.5612484562_rlk3.jpg',
+                          'https://i.etsystatic.com/39698029/r/il/ac6731/5612485572/il_75x75.5612485572_ez95.jpg',
+                          'https://i.etsystatic.com/39698029/r/il/0a7cdf/5612485584/il_794xN.5612485584_d3s5.jpg'],
+                title: 'Blue traditional kurta',
+                description: 'Elegant and stylish for party',
+                price: '$120'
+            },
+            { 
+                images: ['https://i.etsystatic.com/39698029/r/il/2dff8c/6389556634/il_794xN.6389556634_jn17.jpg', 
+                'https://i.etsystatic.com/39698029/r/il/0586f1/6389556650/il_75x75.6389556650_5zv5.jpg',
+                 'https://i.etsystatic.com/39698029/r/il/774891/6437647499/il_75x75.6437647499_nckv.jpg',
+                  'https://i.etsystatic.com/39698029/r/il/983e86/6389557354/il_75x75.6389557354_q91b.jpg',
+                   'https://i.etsystatic.com/39698029/r/il/8725ce/6389557600/il_75x75.6389557600_hnvu.jpg'],
+                title: 'Black Traditional Men Kurta',
+                description: 'Ideal for weddings and formal events',
+                price: '$80'
+            }
+        ];
+
+        const suitContainer = document.getElementById('suitContainer');
+        let suitCards = '';
+
+        suits.forEach((suit, index) => {
+            let suitCard = `
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="${suit.images[0]}" class="card-img-top" alt="${suit.title}" onclick="openGallery(${index})">
+                        <div class="card-body text-center">
+                            <h3>${suit.title}</h3>
+                            <p>${suit.description}</p>
+                            <h4 class="text-success"><strong>${suit.price}</strong></h4>
+                            <a href="https://wa.me/923077533292?text=${encodeURIComponent('I want to order ' + suit.title + ' - Price: ' + suit.price)}" 
+                               class="btn btn-success w-100">Order on WhatsApp</a>
+                        </div>
+                    </div>
+                </div>`;
+            suitCards += suitCard;
+        });
+
+        suitContainer.innerHTML = suitCards;
+
+        let currentImages = [];
+        let currentIndex = 0;
+
+        function openGallery(index) {
+            currentImages = suits[index].images;
+            currentIndex = 0;
+            document.getElementById("modalImage").src = currentImages[currentIndex];
+            new bootstrap.Modal(document.getElementById('imageModal')).show();
+        }
+
+        document.getElementById("prevBtn").addEventListener("click", function () {
+            if (currentIndex > 0) {
+                currentIndex--;
+                document.getElementById("modalImage").src = currentImages[currentIndex];
+            }
+        });
+
+        document.getElementById("nextBtn").addEventListener("click", function () {
+            if (currentIndex < currentImages.length - 1) {
+                currentIndex++;
+                document.getElementById("modalImage").src = currentImages[currentIndex];
+            }
+        });
+    </script>
+
+    <footer class="footer bg-dark text-white text-center p-4">
+        <p>&copy; 2025 Malik Tailors. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
