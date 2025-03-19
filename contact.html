@@ -32,29 +32,32 @@
     </style>
 </head>
 <body>
-
-    <header class="bg-dark text-white p-3 text-center">
-        <h1>Malik Tailors</h1>
-            <nav>
-                <a href="index.html" class="text-white mx-3">Home</a>
-                <a href="suitdesign.html" class="text-white mx-3">Suit Designs</a>
-                <a href="about.html" class="text-white mx-3">About</a>
-                <a href="contact.html" class="text-white mx-3">Contact</a>
+<header class="bg-dark text-white p-3">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="index.html">
+                    <img src="./logo.jpg" alt="Malik Tailors" height="50" style="max-width: 150px; object-fit: contain;"> </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="suitdesign.html">Suit Designs</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
             </nav>
-        </header>
-        
-        <style>
+        </div>
+    </header> <style>
             header nav a {
                 text-decoration: none; /* Underline hatane ke liye */
             }
-        </style>
-        
-    </header>
-
-    <section class="contact-section">
+        </style></header> <section class="contact-section">
         <h2>Get In Touch</h2>
         <p>Have questions or want to place an order? Reach out to us!</p>
-
         <div class="contact-info mt-4">
             <p>📍 Address: Model Bazar Near City Police Station, Pakpattan, Pakistan</p>
             <p>📞 Phone: <a href="tel:+923077533292">+92 307 7533292</a></p>
@@ -62,10 +65,10 @@
             <p>💬 WhatsApp: <a href="https://wa.me/923077533292">Chat Now</a></p>
         </div>
     </section>
-
     <footer class="footer">
         <p>&copy; 2025 Malik Tailors. All rights reserved.</p>
     </footer>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
