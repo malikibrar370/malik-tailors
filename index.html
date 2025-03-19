@@ -43,7 +43,6 @@
             margin-top: auto;
         }
         .btn-success:hover { background-color: #1ebe57; }
-
         /* Footer */
         .footer {
             background: #222;
@@ -56,25 +55,29 @@
     </style>
 </head>
 <body>
-
     <header class="bg-dark text-white p-3">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="logo">
-                <a href="index.html">
-                    <img src="./logo.jpg" alt="Malik Tailors" height="60" style="max-width: 150px; object-fit: contain;">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="index.html">
+                    <img src="./logo.jpg" alt="Malik Tailors" height="50" style="max-width: 150px; object-fit: contain;">
                 </a>
-            </div>
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="suitdesign.html">Suit Designs</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="about.html">About</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="contact.html">Contact</a></li>
-                </ul>
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Navbar Links -->
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="suitdesign.html">Suit Designs</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
             </nav>
         </div>
     </header>
-
     <section id="home" class="hero">
         <div class="container">
             <h1>Men's Collection</h1>
@@ -110,7 +113,6 @@
             </div>
         </div>
     </div>
-
     <script>
         const suits = [
             { 
@@ -176,50 +178,43 @@
                 description: 'Ideal for weddings and formal events',
                 price: '$60'
             }
-
-
         ];
-
         const suitContainer = document.getElementById('suitContainer');
         let suitCards = '';
-
         suits.forEach((suit, index) => {
-            let suitCard = `
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="${suit.images[0]}" class="card-img-top" alt="${suit.title}" onclick="openGallery(${index})">
-                        <div class="card-body">
-                            <h3>${suit.title}</h3>
-                            <p>${suit.description}</p>
-                            <h4 class="text-success"><strong>${suit.price}</strong></h4>
-                            <a href="https://wa.me/923077533292?text=${encodeURIComponent('I want to order ' + suit.title + ' - Price: ' + suit.price)}" 
-                               class="btn btn-success w-100">Order on WhatsApp</a>
-                        </div>
-                    </div>
-                </div>`;
-            suitCards += suitCard;
-        });
+    let message = `I want to order: ${suit.title}%0aPrice: ${suit.price}%0aImage: ${suit.images[0]}`;
+    let whatsappLink = `https://wa.me/923077533292?text=${message}`;
+    let suitCard = `
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="${suit.images[0]}" class="card-img-top" alt="${suit.title}" onclick="openGallery(${index})">
+                <div class="card-body">
+                    <h3>${suit.title}</h3>
+                    <p>${suit.description}</p>
+                    <h4 class="text-success"><strong>${suit.price}</strong></h4>
+                    <a href="${whatsappLink}" class="btn btn-success w-100" target="_blank">Order on WhatsApp</a>
+                </div>
+            </div>
+        </div>`;
 
-        suitContainer.innerHTML = suitCards;
-
+    suitCards += suitCard;
+});
+suitContainer.innerHTML = suitCards;
         // Modal Gallery Functionality
         let currentImages = [];
         let currentIndex = 0;
-
         function openGallery(index) {
             currentImages = suits[index].images;
             currentIndex = 0;
             document.getElementById("modalImage").src = currentImages[currentIndex];
             new bootstrap.Modal(document.getElementById('imageModal')).show();
         }
-
         document.getElementById("prevBtn").addEventListener("click", function () {
             if (currentIndex > 0) {
                 currentIndex--;
                 document.getElementById("modalImage").src = currentImages[currentIndex];
             }
         });
-
         document.getElementById("nextBtn").addEventListener("click", function () {
             if (currentIndex < currentImages.length - 1) {
                 currentIndex++;
@@ -227,7 +222,6 @@
             }
         });
     </script>
-
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 Malik Tailors.</p>
@@ -235,7 +229,6 @@
             <p>Contact: <a href="tel:+1234567890">+92 3077533292 </a> | Email: <a href="malikibrarjaved@gmail.com">info@maliktailors.com</a></p>
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
